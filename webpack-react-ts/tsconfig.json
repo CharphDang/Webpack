@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist",
+        "module": "esnext",
+        "target": "es5",
+        "sourceMap": true,
+        "noEmit": false,
+        "downlevelIteration": true,
+        "checkJs": false,
+        "allowJs": true,
+        "jsx": "react",
+        "lib": ["dom", "es5", "es2016"],
+        "allowSyntheticDefaultImports": true,
+        "noImplicitAny": false,
+        "moduleResolution": "node",
+        "experimentalDecorators": true
+    },
+    "include": ["./webapp/**/*.tsx", "./typings/**/*.d.ts"],
+    "exclude": ["node_modules", "dist"]
+}

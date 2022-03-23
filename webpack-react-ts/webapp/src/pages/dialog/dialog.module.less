@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: gray;
+    opacity: 0.8;
+    .dialog {
+        width: 300px;
+        height: 200px;
+        
+        >.head {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+            background-color: aquamarine;
+            >.closeIcon {
+                position: absolute;
+                right: 0;
+            }
+        }
+        >.body {
+            height: calc(~'100% - 50px');
+            background-color: bisque;
+        }
+    }
+}
+
+
