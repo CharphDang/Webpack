@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const path = require('path');
 
 const devConfig = {
@@ -15,7 +14,6 @@ const devConfig = {
     ]
   },
   plugins: [
-    // new ReactRefreshWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ],
   // 本地服务启动， 会不生成实际的dist，只存在于缓存中， hot是热更新功能

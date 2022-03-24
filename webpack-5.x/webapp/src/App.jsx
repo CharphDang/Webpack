@@ -1,11 +1,13 @@
 import { useState } from 'react';
+import SvgIcon from '@component/SvgIcon'
 import './App.css';
-
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <div className='App'>
+      <SvgIcon name="test"></SvgIcon>
+      <SvgIcon name="ic_laoding"></SvgIcon>
       <header className='App-header'>
         <p>
           <button type='button' onClick={() => setCount(count => count + 1)}>
@@ -22,7 +24,7 @@ function App() {
             target='_blank'
             rel='noopener noreferrer'
           >
-            Learn React111
+            Learn React
           </a>
         </p>
       </header>

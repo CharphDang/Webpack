@@ -11,7 +11,7 @@ const prodConfig = require('./webpack.prod');
 const commonConfig = {
   // 入口， 推荐使用对象
   entry: {
-    // vendors: ['react', 'react-dom'],
+    vendors: ['react', 'react-dom'],
     main: path.join(__dirname, 'webapp/src/main.jsx')
   },
   // 输出配置
@@ -30,7 +30,12 @@ const commonConfig = {
       // * 第一： 最重要的是给自己的js、ts、jsx等配置loader,babel,polyfill
       {
         test: /\.(js|jsx)$/,
-        use: ['babel-loader'],
+        use: [
+          'thread-loader', // 其后loader开启独立worker池
+          {
+            loader: 'babel-loader?cacheDirectory' // 开启babel-loader缓存
+          }
+        ],
         exclude: [path.resolve(__dirname, 'node_modules')]
       },
 
@@ -60,7 +65,33 @@ const commonConfig = {
         },
         generator: {
           filename: 'static/fonts/[name].[contenthash:6][ext]'
-        }
+        },
+        exclude: [path.resolve(__dirname, 'webapp/src/icons')]
+      },
+      {
+        test: /\.(svg)$/,
+        use: [
+          {
+            loader: 'svg-sprite-loader',
+            options: {
+              symbolId: 'icon-[name]'
+            }
+          },
+          {
+            loader: 'svgo-loader',
+            options: {
+              plugins: [
+                {
+                  name: 'removeAttrs',
+                  params: {
+                    attrs: '(fill|stroke)'
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        include: [path.resolve(__dirname, 'webapp/src/icons')]
       }
     ]
   },
@@ -84,10 +115,15 @@ const commonConfig = {
     })
   ],
   resolve: {
-    extensions: ['.jsx', '.js']
+    extensions: ['.jsx', '.js'],
+    alias: {
+      '@component': path.resolve(__dirname, 'webapp/src/components')
+    }
   },
   // 优化属性
   optimization: {
+    // tree shaking,将没有引用的代码摇掉，在package.json 中设置，将不需要树摇的列举出来
+    // sideEffects:[ "*.css", "*.less", "iconfont.js", "*/*/icons/index.js"]
     usedExports: true,
     splitChunks: {
       chunks: 'all',

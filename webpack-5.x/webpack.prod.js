@@ -1,5 +1,7 @@
 // * prod 的时候， css，less需要重新配置压缩单独提取
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+
 const prodConfig = {
   mode: 'production',
   devtool: false,
@@ -31,6 +33,19 @@ const prodConfig = {
     chunkIds: 'deterministic',
     moduleIds: 'deterministic',
     minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        minify: CssMinimizerPlugin.cssoMinify,
+        minimizerOptions: {
+          preset: [
+            'default',
+            {
+              discardComments: { removeAll: true }
+            }
+          ]
+        }
+      })
+    ]
   }
 };
 
