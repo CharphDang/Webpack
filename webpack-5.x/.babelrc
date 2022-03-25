@@ -8,5 +8,10 @@
       }
     ]
   ],
+  "env": {
+    "development": {
+      "plugins": ["react-refresh/babel"]
+    }
+  },
   "plugins": [["@babel/plugin-transform-runtime", { "corejs": 3 }]]
 }
