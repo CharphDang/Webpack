@@ -136,15 +136,17 @@ const commonConfig = {
   }
 };
 
-module.exports = env => {
-  console.log('mode:', env.production);
+module.exports = () => {
+  const mode = process.env.NODE_ENV || 'development';
+  console.log('mode:', mode);
+  const isProduction = mode === 'production'
   // webpack5 target 默认不是web
-  commonConfig.target = env.production ? 'browserslist' : 'web';
+  commonConfig.target = isProduction ? 'browserslist' : 'web';
 
-  let config = env.production ? merge(commonConfig, prodConfig) : merge(commonConfig, devConfig);
+  let config = isProduction ? merge(commonConfig, prodConfig) : merge(commonConfig, devConfig);
 
   // 添加分析
-  if (env.analyze) {
+  if (process.env.ANALYZE) {
     const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
     config.plugins.push(new BundleAnalyzerPlugin());
   }

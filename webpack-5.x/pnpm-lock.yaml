@@ -10,6 +10,7 @@ specifiers:
   autoprefixer: ^10.4.4
   babel-loader: ^8.2.4
   copy-webpack-plugin: ^10.2.4
+  cross-env: ^7.0.3
   css-loader: ^6.7.1
   css-minimizer-webpack-plugin: ^3.4.1
   cssnano: ^5.1.5
@@ -47,6 +48,7 @@ devDependencies:
   autoprefixer: 10.4.4_postcss@8.4.12
   babel-loader: 8.2.4_fa907c5a4f16ccc493e21649ccc59574
   copy-webpack-plugin: 10.2.4_webpack@5.70.0
+  cross-env: 7.0.3
   css-loader: 6.7.1_webpack@5.70.0
   css-minimizer-webpack-plugin: 3.4.1_webpack@5.70.0
   cssnano: 5.1.5_postcss@8.4.12
@@ -2338,6 +2340,14 @@ packages:
       parse-json: 5.2.0
       path-type: 4.0.0
       yaml: 1.10.2
+    dev: true
+
+  /cross-env/7.0.3:
+    resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==}
+    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
+    hasBin: true
+    dependencies:
+      cross-spawn: 7.0.3
     dev: true
 
   /cross-spawn/7.0.3:
