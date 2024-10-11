@@ -11,17 +11,22 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // * 利用glob， npm i glob -D
 const glob = require('glob');
+const path = require('path');
 
-const setMultiPage = filepath => {
+
+const filePath = path.join(__dirname, './webapp/src/page/**/index.js').replace(/\\/g, '/');
+const fileRegExp = new RegExp(path.sep === '/' ? 'src/page/(.*)/index.js' : 'src\\\\page\\\\(.*)\\\\index.js');
+
+const setMultiPage = () => {
     const entry = {};
     const htmlWebpackPlugins = [];
 
     // 具体实现
-    const entryFiles = glob.sync(filepath);
+    const entryFiles = glob.sync(filePath);
     entryFiles.map((item, index) => {
         console.log(item, index);
         const entryFile = entryFiles[index];
-        const match = entryFile.match(/src\/page\/(.*)\/index\.js$/);
+        const match = entryFile.match(fileRegExp);
         const pageName = match && match[1];
         const entryKey = `${pageName}\/${pageName}`;
         entry[entryKey] = entryFile;
